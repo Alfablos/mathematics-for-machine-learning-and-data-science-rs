@@ -53,6 +53,26 @@ result_matrix[1] = 1/11 * result_matrix[1]
 print('Solution:')
 print(result_matrix)
 
+print('Row reduction')
+
+print('R1 = -1 * R1')
+result_matrix[0] = -1 * result_matrix[0]
+
+print(result_matrix)
+
+print('R1 = 7/2 * R2 + R1')
+result_matrix[0] = 7/2 * result_matrix[1] + result_matrix[0]
+
+print(result_matrix)
+
+print('R1 = -1/2 * R2 + R1')
+result_matrix[0] = -1/2 * result_matrix[1] + result_matrix[0]
+
+print(result_matrix)
+print(f'x1 = {result_matrix[0][2]}')
+print(f'x1 = {result_matrix[1][2]}')
+
+
 
 
 def plot_lines(M):
@@ -91,7 +111,7 @@ def plot_lines(M):
     plt.show()
     
     
-plot_lines(result_matrix)
+# plot_lines(result_matrix)
 
 
 print('-------------------')
@@ -110,8 +130,3 @@ d_2 = np.linalg.det(A_2)
 
 print(f"Determinant of matrix A_2: {d_2:.2f}")
 
-try:
-  solutions = np.linalg.solve(A_2, b_2)
-  print('Solutions:' + str(solutions))
-except:
-  print('The system does not have a unique solution.')

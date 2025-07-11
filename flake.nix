@@ -1,7 +1,8 @@
 {
   description = "Mathematics for Machine Learning and Data Science in Rust";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixpkgs-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs?ref=nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=9b008d60392981ad674e04016d25619281550a9d";
     oxalica-rust.url = "github:oxalica/rust-overlay";
   };
 
@@ -70,7 +71,7 @@
             # Since aliases don't work
             (pkgs.writeShellScriptBin "rustrover" "tmux new -d 'rust-rover .'")
             (pkgs.writeShellScriptBin "pycharm" "tmux new -d 'pycharm-professional .'")
-            
+            pkgs.openssl
             python
           ] ++ lib.optionals pkgs.config.cudaSupport ((with pkgs.cudaPackages; [
             cuda_cudart
@@ -102,11 +103,15 @@
             echo "Cargo version: $(cargo --version)"
             echo "Rust toolchain location: ${oxalica-override}/bin"
             echo "RUST_SRC_PATH (stdlib location): $RUST_SRC_PATH"
-            
+            echo
+            echo
+
             echo "=== PYTHON ==="
+            echo
             echo "Setting PYTHONPATH to ${python}/${python.sitePackages}"
             export PYTHONPATH="${python}/${python.sitePackages}"
             echo Running $(python --version) @ $(which python) ${if pkgs.config.cudaSupport then "with CUDA support" else ""}
+            echo
           '';
           
         };
